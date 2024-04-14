@@ -67,7 +67,7 @@ const images = [
   const gallery = document.querySelector('.gallery');
 
   const createImg = images.map(({description, preview, original}) => {
-    return `<li class="gallery-item"><a class="gallety-link" href="${original}"><img class='gallery-image' data-source="${original}" alt="${description}" src="${preview}"></a></li>`;
+    return `<li class="gallery-item"><a class="gallery-link" href="${original}"><img class='gallery-image' data-source="${original}" alt="${description}" src="${preview}"></a></li>`;
   }).join("");
 
   gallery.insertAdjacentHTML("beforeend", createImg);
@@ -75,8 +75,8 @@ const images = [
   gallery.addEventListener("click", getLink)
 
   function getLink(event) {
-    console.log(event.target.dataset.source);
-    if(event.target === event.currentTarget) {
+    event.preventDefault()
+    if(event.target.nodeName !== 'IMG') {
       return;
     }
 
